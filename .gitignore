@@ -1,0 +1,18 @@
+# SQLite Databases (Generated via python src/etl_pipeline.py)
+*.db
+*.sqlite
+*.sqlite3
+
+# Python Cache & Environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+ENV/
+.ipynb_checkpoints/
+
+# OS Specific
+.DS_Store
+Thumbs.db
