@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     await loadDashboardData();
     setupEventListeners();
     applyFilters();
-    setupTheme();
 });
 
 // Load data from exported JSON
@@ -42,18 +41,6 @@ function setupEventListeners() {
     });
 
     document.getElementById('improvementSlider').addEventListener('input', updateCalculator);
-    document.getElementById('tableSearch').addEventListener('input', renderSessionTable);
-}
-
-// Dark / Light Theme Toggle
-function setupTheme() {
-    const themeBtn = document.getElementById('themeToggleBtn');
-    themeBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const nextTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', nextTheme);
-        renderCharts(); // Re-render charts with updated theme colors
-    });
 }
 
 // Apply Filters
@@ -74,7 +61,6 @@ function applyFilters() {
     updateKPICards();
     renderCharts();
     updateCalculator();
-    renderSessionTable();
 }
 
 // Update KPI Cards
@@ -106,9 +92,8 @@ function updateKPICards() {
 
 // Render Charts
 function renderCharts() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const textColor = isDark ? '#f9fafb' : '#1f2937';
-    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)';
+    const textColor = '#f9fafb';
+    const gridColor = 'rgba(255, 255, 255, 0.1)';
 
     // 1. Revenue by Channel Chart
     const channels = ['Email', 'Google Ads', 'Social Media', 'Organic'];
@@ -225,7 +210,7 @@ function renderCharts() {
                 label: 'Sum of Revenue',
                 data: dailyRevenueVals,
                 borderColor: '#2563eb',
-                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                backgroundColor: 'rgba(37, 99, 235, 0.15)',
                 tension: 0.3,
                 fill: true,
                 pointRadius: 3,
@@ -257,7 +242,7 @@ function renderCharts() {
     });
 }
 
-// Update Interactive ABM Revenue Recovery Simulator
+// Update Interactive Revenue Recovery Simulator
 function updateCalculator() {
     const sliderVal = parseInt(document.getElementById('improvementSlider').value);
     document.getElementById('sliderValue').innerText = `${sliderVal}% Improvement`;
@@ -275,39 +260,4 @@ function updateCalculator() {
 
     document.getElementById('calcOrders').innerText = `${recoveredOrders.toLocaleString()} orders`;
     document.getElementById('calcRevenue').innerText = `$${projectedRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-}
-
-// Render Session Data Explorer Table
-function renderSessionTable() {
-    const tbody = document.getElementById('sessionTableBody');
-    const query = document.getElementById('tableSearch').value.toLowerCase().trim();
-
-    const displaySessions = filteredSessions.filter(s => {
-        if (!query) return true;
-        return (
-            s.Session_ID.toLowerCase().includes(query) ||
-            s.User_ID.toLowerCase().includes(query) ||
-            s.Channel.toLowerCase().includes(query) ||
-            s.Device.toLowerCase().includes(query) ||
-            s.Region.toLowerCase().includes(query) ||
-            s.Product_Category.toLowerCase().includes(query)
-        );
-    }).slice(0, 50); // Top 50 rows for fast UI rendering
-
-    tbody.innerHTML = displaySessions.map(s => {
-        const stageClass = `stage-${s.Reached_Purchase ? 4 : (s.Reached_Checkout ? 3 : (s.Reached_Add_to_Cart ? 2 : 1))}`;
-        return `
-            <tr>
-                <td><strong>${s.Session_ID}</strong></td>
-                <td>${s.User_ID}</td>
-                <td>${s.Date}</td>
-                <td>${s.Channel}</td>
-                <td>${s.Device}</td>
-                <td>${s.Region}</td>
-                <td>${s.Product_Category}</td>
-                <td><span class="stage-badge ${stageClass}">${s.Max_Stage_Reached}</span></td>
-                <td>$${(s.Total_Revenue || 0).toFixed(2)}</td>
-            </tr>
-        `;
-    }).join('');
 }

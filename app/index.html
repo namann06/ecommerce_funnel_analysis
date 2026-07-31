@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Funnel Drop-off Diagnostics & ABM Growth Dashboard</title>
+    <title>E-Commerce Funnel Drop-off Diagnostics</title>
     <link rel="stylesheet" href="styles.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +19,7 @@
         <header>
             <div class="title-group">
                 <h1>Funnel Drop-off Diagnostics</h1>
-                <p>E-Commerce User Journey Analytics & Account-Based Marketing (ABM) Revenue Insights</p>
-            </div>
-            <div class="header-controls">
-                <span class="abm-badge">ABM Analytics Portfolio Project</span>
-                <button class="btn-icon" id="themeToggleBtn">🌓 Toggle Theme</button>
+                <p>E-Commerce User Journey Analytics & Conversion Optimization Dashboard</p>
             </div>
         </header>
 
@@ -134,23 +130,23 @@
             </div>
         </div>
 
-        <!-- ABM Strategy & Business Value Impact Engine -->
+        <!-- Growth & Revenue Recovery Strategy Panel -->
         <section class="abm-section">
-            <h2>🎯 Account-Based Marketing (ABM) Growth & Revenue Recovery Strategy</h2>
+            <h2>🎯 Conversion Optimization & Revenue Recovery Strategy</h2>
             <div class="abm-grid">
                 <div class="abm-card">
                     <h4>1. Checkout Abandonment Recovery (Biggest Revenue Leakage)</h4>
                     <p>
                         <strong>Diagnostic Finding:</strong> 69.35% of users who reach the Checkout stage drop off before completing their purchase (2,444 abandoned carts).<br>
-                        <strong>ABM Solution:</strong> Implement dynamic 2-hour automated cart abandonment emails with single-click checkout links and personalized product incentives for high-value accounts.
+                        <strong>Solution:</strong> Implement dynamic 2-hour automated cart abandonment emails with single-click checkout links and personalized product incentives.
                     </p>
                 </div>
 
                 <div class="abm-card">
-                    <h4>2. Channel ROI & Account Target Allocation</h4>
+                    <h4>2. Channel ROI & Ad Spend Target Allocation</h4>
                     <p>
                         <strong>Diagnostic Finding:</strong> Google Ads ($312.8K) and Organic ($307.4K) yield the highest per-session value ($122+), while Email ($276.1K) has the lowest conversion rate (10.20%).<br>
-                        <strong>ABM Solution:</strong> Reallocate 15% of low-performing ad spend into retargeting email leads with tailored landing pages and VIP buyer discounts.
+                        <strong>Solution:</strong> Reallocate 15% of underperforming ad spend into retargeting email leads with tailored landing pages and VIP buyer discounts.
                     </p>
                 </div>
             </div>
@@ -166,36 +162,6 @@
                     <span>Recovered Orders: <strong id="calcOrders">122 orders</strong></span>
                     <span>Projected Incremental Revenue: <strong id="calcRevenue">$133,108.14</strong></span>
                 </div>
-            </div>
-        </section>
-
-        <!-- Session Explorer Data Table -->
-        <section class="data-explorer-card">
-            <div class="table-header">
-                <h3>🔍 Session Data Explorer & Stage Inspection</h3>
-                <div class="search-box">
-                    <input type="text" id="tableSearch" placeholder="Search Session ID, Region, Device...">
-                </div>
-            </div>
-            <div class="table-container">
-                <table id="sessionTable">
-                    <thead>
-                        <tr>
-                            <th>Session ID</th>
-                            <th>User ID</th>
-                            <th>Date</th>
-                            <th>Channel</th>
-                            <th>Device</th>
-                            <th>Region</th>
-                            <th>Category</th>
-                            <th>Max Stage Reached</th>
-                            <th>Revenue ($)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sessionTableBody">
-                        <!-- Populated dynamically via app.js -->
-                    </tbody>
-                </table>
             </div>
         </section>
 
