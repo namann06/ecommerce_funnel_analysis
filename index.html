@@ -1,14 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=app/index.html">
-    <title>E-Commerce Funnel Dashboard Redirect</title>
-    <script>
-        window.location.href = "app/index.html";
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Funnel Drop-off Diagnostics</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <p>Redirecting to <a href="app/index.html">E-Commerce Funnel Dashboard</a>...</p>
+    <div class="dashboard-container">
+        
+        <!-- Header -->
+        <header>
+            <div class="title-group">
+                <h1>Funnel Drop-off Diagnostics</h1>
+                <p>E-Commerce User Journey Analytics & Conversion Optimization Dashboard</p>
+            </div>
+        </header>
+
+        <!-- Filter Controls -->
+        <section class="filter-bar">
+            <div class="filter-group">
+                <label for="channelFilter">Acquisition Channel</label>
+                <select id="channelFilter">
+                    <option value="ALL">All Channels</option>
+                    <option value="Email">Email</option>
+                    <option value="Google Ads">Google Ads</option>
+                    <option value="Social Media">Social Media</option>
+                    <option value="Organic">Organic</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="deviceFilter">User Device</label>
+                <select id="deviceFilter">
+                    <option value="ALL">All Devices</option>
+                    <option value="Desktop">Desktop</option>
+                    <option value="Mobile">Mobile</option>
+                    <option value="Tablet">Tablet</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="regionFilter">Geographic Region</label>
+                <select id="regionFilter">
+                    <option value="ALL">All Regions</option>
+                    <option value="East">East</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    <option value="West">West</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="categoryFilter">Product Category</label>
+                <select id="categoryFilter">
+                    <option value="ALL">All Categories</option>
+                    <option value="Beauty">Beauty</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Fashion">Fashion</option>
+                    <option value="Home">Home</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+
+            <div class="filter-group" style="justify-content: flex-end;">
+                <button class="btn-icon" id="resetFiltersBtn" style="height: 38px; width: 100%;">🔄 Reset Filters</button>
+            </div>
+        </section>
+
+        <!-- Top Section: KPI Cards & Baseline Funnel Visuals -->
+        <div class="top-grid">
+            <!-- Funnel KPI Column -->
+            <div class="kpi-column">
+                <div class="kpi-card">
+                    <label>% Browse</label>
+                    <div class="kpi-value" id="kpiBrowsePct">100.00%</div>
+                    <div class="kpi-sub" id="kpiBrowseCount">10,000 sessions</div>
+                </div>
+
+                <div class="kpi-card">
+                    <label>% added to cart</label>
+                    <div class="kpi-value" id="kpiCartPct">70.59%</div>
+                    <div class="kpi-sub" id="kpiCartCount">7,059 sessions</div>
+                </div>
+
+                <div class="kpi-card">
+                    <label>% Check Out</label>
+                    <div class="kpi-value" id="kpiCheckoutPct">35.24%</div>
+                    <div class="kpi-sub" id="kpiCheckoutCount">3,524 sessions</div>
+                </div>
+
+                <div class="kpi-card">
+                    <label>% Purchase</label>
+                    <div class="kpi-value" id="kpiPurchasePct">10.80%</div>
+                    <div class="kpi-sub" id="kpiPurchaseCount">1,080 sessions</div>
+                </div>
+            </div>
+
+            <!-- Revenue by Channel -->
+            <div class="chart-card">
+                <h3>Revenue by Channel</h3>
+                <div class="chart-wrapper">
+                    <canvas id="revenueChannelChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Drop Off Rate by Device -->
+            <div class="chart-card">
+                <h3>Drop Off Rate by Device</h3>
+                <div class="chart-wrapper">
+                    <canvas id="dropoffDeviceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Grid: Revenue Trajectory Line Chart -->
+        <div class="bottom-grid">
+            <div class="chart-card daily-revenue-card">
+                <h3>Sum of Revenue by Day</h3>
+                <div class="chart-wrapper">
+                    <canvas id="dailyRevenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Growth & Revenue Recovery Strategy Panel -->
+        <section class="abm-section">
+            <h2>🎯 Conversion Optimization & Revenue Recovery Strategy</h2>
+            <div class="abm-grid">
+                <div class="abm-card">
+                    <h4>1. Checkout Abandonment Recovery (Biggest Revenue Leakage)</h4>
+                    <p>
+                        <strong>Diagnostic Finding:</strong> 69.35% of users who reach the Checkout stage drop off before completing their purchase (2,444 abandoned carts).<br>
+                        <strong>Solution:</strong> Implement dynamic 2-hour automated cart abandonment emails with single-click checkout links and personalized product incentives.
+                    </p>
+                </div>
+
+                <div class="abm-card">
+                    <h4>2. Channel ROI & Ad Spend Target Allocation</h4>
+                    <p>
+                        <strong>Diagnostic Finding:</strong> Google Ads ($312.8K) and Organic ($307.4K) yield the highest per-session value ($122+), while Email ($276.1K) has the lowest conversion rate (10.20%).<br>
+                        <strong>Solution:</strong> Reallocate 15% of underperforming ad spend into retargeting email leads with tailored landing pages and VIP buyer discounts.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Interactive Revenue Simulator -->
+            <div class="calculator-box">
+                <label>
+                    <span>🧮 Interactive Revenue Recovery Simulator: Reduce Checkout Abandonment</span>
+                    <span id="sliderValue">5% Improvement</span>
+                </label>
+                <input type="range" id="improvementSlider" min="1" max="20" value="5" step="1">
+                <div class="calc-results">
+                    <span>Recovered Orders: <strong id="calcOrders">122 orders</strong></span>
+                    <span>Projected Incremental Revenue: <strong id="calcRevenue">$133,108.14</strong></span>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
 </body>
 </html>
